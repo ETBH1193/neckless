@@ -42,7 +42,7 @@
             margin-top: 10px;
         }
 
-        input, button, select {
+        input, select, button {
             font-size: 16px;
             padding: 10px;
             margin: 10px 0;
@@ -97,23 +97,25 @@
         </div>
 
         <!-- Netlify Signup Form -->
-        <form name="signup" method="POST" data-netlify="true">
-            <label>
-                Name:
-                <input type="text" name="name" required>
-            </label><br>
-            <label>
-                Email:
-                <input type="email" name="email" required>
-            </label><br>
-            <label>
-                Select:
-                <select name="dinner_choice">
-                    <option value="dinner">Dinner</option>
-                    <option value="just_party">Just Party</option>
-                </select>
-            </label><br>
-            <button type="submit">Submit</button>
+        <form name="signup" netlify>
+            <p>
+                <label>Name <input type="text" name="name" required /></label>
+            </p>
+            <p>
+                <label>Email <input type="email" name="email" required /></label>
+            </p>
+            <p>
+                <label>
+                    Dinner Choice
+                    <select name="dinner_choice">
+                        <option value="dinner">Dinner</option>
+                        <option value="just_party">Just Party</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <button type="submit">Submit</button>
+            </p>
         </form>
     </div>
 
@@ -171,4 +173,3 @@
 
 </body>
 </html>
-
