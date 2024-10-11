@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NECKLESS NIGHTS</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            background-image: url('https://example.com/kælder_baggrund.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            text-align: center;
+            border: 4px solid red;
+            padding: 40px;
+            width: 80%;
+            max-width: 600px;
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 20px red, 0 0 40px red;
+            animation: neonGlow 0.5s infinite alternate;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: red;
+        }
+
+        .countdown, p {
+            font-size: 20px;
+            color: white;
+            margin-top: 10px;
+        }
+
+        input, button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background-color: black;
+            color: red;
+            border: 2px solid red;
+            text-align: center;
+        }
+
+        button {
+            background-color: red;
+            color: black;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes neonGlow {
+            0% { box-shadow: 0 0 10px red, 0 0 20px red; }
+            50% { box-shadow: 0 0 20px red, 0 0 30px red; }
+            100% { box-shadow: 0 0 10px red, 0 0 20px red; }
+        }
+
+        .typewriter p {
+            display: inline;
+            border-right: 2px solid red;
+            white-space: pre-wrap;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Signup Section -->
+    <div id="signup-section" class="container">
+        <h1>NECKLESS NIGHTS</h1>
+        <div class="countdown" id="countdown"></div>
+        <p>By invite only</p>
+        <p>Private basement Nørrebro</p>
+        <p>Enter code for access</p>
+        <input type="password" id="codeInput" placeholder="Enter code" maxlength="4">
+        <button onclick="checkCode()">Enter</button>
+    </div>
+
+    <!-- Event Information Section (Hidden Initially) -->
+    <div id="event-info-section" class="container hidden">
+        <div class="typewriter">
+            <p id="eventText"></p>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function countdownTimer() {
+            var eventDate = new Date("October 19, 2024 16:00:00").getTime();
+            var countdownElement = document.getElementById("countdown");
+
+            var x = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = eventDate - now;
+
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    countdownElement.innerHTML = "Event has started!";
+                }
+            }, 1000);
+        }
+
+        // Typewriter Effect
+        var eventText = "3 DJs. \nStart at 5pm. Dinner at 6pm, and last DJ ends at 10pm.\n\nPrice: 45 DKK without dinner. 80 DKK with dinner. BYOB \n\nMobilePay to 27852447 no later than 17 October.\n\nAddress: Mimersgade 66, 2200. Next to Mimers Kiosken.\n\nExpect lights, music, and a great time!";
+        var index = 0;
+
+        function typeWriter() {
+            if (index < eventText.length) {
+                document.getElementById("eventText").innerHTML += eventText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50); // Speed of typewriter effect
+            }
+        }
+
+        // Check Code Function
+        function checkCode() {
+            var code = document.getElementById("codeInput").value;
+            if (code === "0000") {
+                document.getElementById("signup-section").classList.add("hidden");
+                document.getElementById("event-info-section").classList.remove("hidden");
+                typeWriter(); // Start typewriter effect after code is correct
+            } else {
+                alert("Incorrect code! Try again.");
+            }
+        }
+
+        // Start countdown
+        countdownTimer();
+    </script>
+
+</body>
+</html>
